@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import styles from './fullSizeScreen.css';
-import fetch from 'isomorphic-fetch';
-
+import {currPicture} from '../../api/api';
 
 
 class FullSizeScreen extends Component {
@@ -11,22 +10,22 @@ class FullSizeScreen extends Component {
     };
 
     componentDidMount() {
-
-        fetch(`https://api.500px.com/v1/photos/${this.props.match.params.id}?consumer_key=wB4ozJxTijCwNuggJvPGtBGCRqaZVcF6jsrzUadF`)
-            .then((response) => {
-                response.json().then((data) => {
-                    this.setState({
-                        imgUrl: data.photo.image_url
-                    })
-                });
+        currPicture(this.props.match.params.id).then((data) => {
+            this.setState({
+                imgUrl: data.photo.image_url
             });
+        });
     }
 
     render() {
-        return this.state.imgUrl ? <div className={styles.fullScreenWrapper}>
-            <img src={this.state.imgUrl}/>
-        </div> : <div>loading...</div>
-
+        return <div className={styles.wrapGeneral}>
+            <div className={styles.fullScreenWrapper}>
+                {this.state.imgUrl ?
+                    <img src={this.state.imgUrl}
+                         className={styles.img}/>
+                    : <div>loading...</div>}
+            </div>
+        </div>
     }
 }
 export default FullSizeScreen;

@@ -1,6 +1,18 @@
+.wrapGeneral{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .fullScreenWrapper{
     display: flex;
-    flex-direction: column;
+    width: 90%;
+    height: 100vh;
+    flex-flow: column wrap;
+    justify-content: center;
     align-items: center;
+}
 
+.img{
+    width: 100%;
 }
