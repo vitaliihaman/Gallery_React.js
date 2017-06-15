@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import style from './picture.css';
+import styles from './fullSizeScreen.css';
+import fetch from 'isomorphic-fetch';
 
 
 
-class Picture extends Component {
+class FullSizeScreen extends Component {
     static propTypes = {};
     state = {
         imgUrl: ""
@@ -22,10 +23,10 @@ class Picture extends Component {
     }
 
     render() {
-        return this.state.imgUrl ? <div>
+        return this.state.imgUrl ? <div className={styles.fullScreenWrapper}>
             <img src={this.state.imgUrl}/>
         </div> : <div>loading...</div>
 
     }
 }
-export default Picture;
+export default FullSizeScreen;

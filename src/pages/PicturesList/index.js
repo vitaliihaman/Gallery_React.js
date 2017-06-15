@@ -1,35 +1,49 @@
 import React, {Component} from 'react';
-import style from './pictureList.css';
-import List from '../../components/list'
+import styles from './pictureList.css';
+import List from '../../components/list';
+import Button from '../../components/button';
+import fetch from 'isomorphic-fetch';
+import {getPicturesList} from '../../api/api';
 
 
 class PicturesList extends Component {
     static self = this;
     static propTypes = {};
     state = {
-        photos: []
+        photos: [],
+        page: 0
+    };
+
+    showMorePictures=()=>{
+        this.setState({
+            page: this.state.page + 1
+        });
+
+        getPicturesList(this.state.page +1).then((data) => {
+            console.log(data.photos);
+            this.setState({photos: this.state.photos.concat(data.photos)});
+        });
     };
 
     componentDidMount() {
-        fetch("https://api.500px.com/v1/photos?feature=popular&consumer_key=wB4ozJxTijCwNuggJvPGtBGCRqaZVcF6jsrzUadF")
-            .then((response) => {
-                response.json().then((data) => {
-                    console.log(data.photos);
-                    this.setState({photos: data.photos});
-                });
-            });
+        getPicturesList(this.state.page).then((data) => {
+            console.log(data.photos);
+            this.setState({photos: data.photos});
+        });
     }
 
     render() {
 
-        return <div>
+        return <div className={styles.listWrapper}>
             <List name="first 20 photos"
-                  className={style.list}
-                  photos={this.state.photos}/>
+                  photos={this.state.photos}
+                  className={styles.list}/>
+            <Button onClick = {this.showMorePictures}
+                    className={styles.showMoreBtn}>
+               + Show more
+            </Button>
         </div>
     }
-
-
 }
 
 export default PicturesList;

@@ -38,9 +38,6 @@ const config = {
                 exclude: /node_modules/,
             },
             {
-                exprContextCritical: false,
-            },
-            {
                 test: /\.(css|scss)$/,
                 exclude: /node_modules/,
                 use: ExtractTextPlugin.extract({

@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import PicturesList from './pages/PicturesList';
-import Picture from './pages/Picture';
+import FullSizeScreen from './pages/FullSizeScreen';
+
+
 
 class App extends React.Component {
     static propTypes = {};
@@ -12,7 +14,7 @@ class App extends React.Component {
             <div>
                 <Switch>
                     <Route exact path="/" component={PicturesList}/>
-                    <Route path="/:id" component={Picture}/>
+                    <Route path="/:id" component={FullSizeScreen}/>
                 </Switch>
             </div>
         </Router>
